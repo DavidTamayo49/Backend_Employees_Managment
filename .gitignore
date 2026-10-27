@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Configuración local con credenciales ###
+src/main/resources/application.properties
