@@ -16,4 +16,8 @@ public interface UserRepository {
     Flux<UserDetailDomain> findAllDetailed();
 
     Flux<UserDetailDomain> findDetailedByCompanyId(UUID companyId);
+
+    Mono<Boolean> existsById(UUID id);
+
+    Mono<Void> deleteById(UUID id);
 }

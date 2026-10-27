@@ -1,6 +1,7 @@
 package com.dtm.reactive_application.infrastructure.primaryadapters.controller;
 
 import com.dtm.reactive_application.crosscutting.exception.ReactiveApplicationException;
+import com.dtm.reactive_application.domain.user.exceptions.UserDoesNotExistsException;
 import com.dtm.reactive_application.infrastructure.primaryadapters.controller.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,11 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(UserDoesNotExistsException.class)
+    public Mono<ResponseEntity<Response<Object>>> handleNotFound(final UserDoesNotExistsException exception) {
+        return Mono.just(build(exception.getUserMessage(), HttpStatus.NOT_FOUND));
+    }
 
     @ExceptionHandler(ReactiveApplicationException.class)
     public Mono<ResponseEntity<Response<Object>>> handleControlled(final ReactiveApplicationException exception) {

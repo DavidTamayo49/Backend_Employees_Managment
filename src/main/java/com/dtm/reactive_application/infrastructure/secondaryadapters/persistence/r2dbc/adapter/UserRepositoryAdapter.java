@@ -43,4 +43,14 @@ public class UserRepositoryAdapter implements UserRepository {
     public Flux<UserDetailDomain> findDetailedByCompanyId(final UUID companyId) {
         return userDetailQuery.findByCompanyId(companyId);
     }
+
+    @Override
+    public Mono<Boolean> existsById(final UUID id) {
+        return r2dbcRepository.existsById(id);
+    }
+
+    @Override
+    public Mono<Void> deleteById(final UUID id) {
+        return r2dbcRepository.deleteById(id);
+    }
 }
