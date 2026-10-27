@@ -2,6 +2,7 @@ package com.dtm.reactive_application.infrastructure.secondaryadapters.persistenc
 
 import com.dtm.reactive_application.domain.user.UserDomain;
 import com.dtm.reactive_application.infrastructure.secondaryadapters.persistence.r2dbc.entity.UserEntity;
+import com.dtm.reactive_application.infrastructure.secondaryadapters.persistence.r2dbc.repository.UserDetailQuery;
 import com.dtm.reactive_application.infrastructure.secondaryadapters.persistence.r2dbc.repository.UserR2dbcRepository;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.when;
 class UserRepositoryAdapterTest {
 
     private final UserR2dbcRepository r2dbcRepository = mock(UserR2dbcRepository.class);
-    private final UserRepositoryAdapter adapter = new UserRepositoryAdapter(r2dbcRepository);
+    private final UserRepositoryAdapter adapter = new UserRepositoryAdapter(r2dbcRepository, mock(UserDetailQuery.class));
 
     @Test
     void savesAsNewEntityAndMapsBackToDomain() {

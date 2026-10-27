@@ -1,8 +1,12 @@
 package com.dtm.reactive_application.application.primaryports.mapper;
 
+import com.dtm.reactive_application.application.primaryports.dto.CatalogItemDTO;
+import com.dtm.reactive_application.application.primaryports.dto.CompanyDTO;
 import com.dtm.reactive_application.application.primaryports.dto.EmployeeDTO;
+import com.dtm.reactive_application.application.primaryports.dto.EmployeeDetailDTO;
 import com.dtm.reactive_application.application.primaryports.dto.RegisterNewEmployeeDTO;
 import com.dtm.reactive_application.crosscutting.helpers.UUIDHelper;
+import com.dtm.reactive_application.domain.user.UserDetailDomain;
 import com.dtm.reactive_application.domain.user.UserDomain;
 
 public final class EmployeeDTOMapper {
@@ -18,5 +22,15 @@ public final class EmployeeDTOMapper {
     public static EmployeeDTO toDTO(final UserDomain domain) {
         return new EmployeeDTO(domain.getId(), domain.getName(), domain.getDocument(),
                 domain.getDocumentTypeId(), domain.getRoleId(), domain.getCompanyId());
+    }
+
+    public static EmployeeDetailDTO toDetailDTO(final UserDetailDomain domain) {
+        final var documentType = domain.getDocumentType();
+        final var role = domain.getRole();
+        final var company = domain.getCompany();
+        return new EmployeeDetailDTO(domain.getId(), domain.getName(), domain.getDocument(),
+                new CatalogItemDTO(documentType.getId(), documentType.getName()),
+                new CatalogItemDTO(role.getId(), role.getName()),
+                new CompanyDTO(company.getId(), company.getName(), company.getNit()));
     }
 }
