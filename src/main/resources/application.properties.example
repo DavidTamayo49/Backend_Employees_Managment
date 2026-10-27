@@ -4,3 +4,6 @@ spring.main.web-application-type=reactive
 spring.r2dbc.url=r2dbc:postgresql://localhost:5432/empleados_db
 spring.r2dbc.username=postgres
 spring.r2dbc.password=TU_CONTRASENA
+
+# Orígenes del front permitidos por CORS (separados por coma)
+app.cors.allowed-origins=http://localhost:5173
