@@ -11,7 +11,13 @@ public interface UserRepository {
 
     Mono<Boolean> existsByDocumentTypeIdAndDocument(UUID documentTypeId, String document);
 
+    Mono<Boolean> existsByDocumentTypeIdAndDocumentAndIdNot(UUID documentTypeId, String document, UUID id);
+
     Mono<UserDomain> save(UserDomain user);
+
+    Mono<UserDomain> update(UserDomain user);
+
+    Mono<UserDomain> findById(UUID id);
 
     Flux<UserDetailDomain> findAllDetailed();
 

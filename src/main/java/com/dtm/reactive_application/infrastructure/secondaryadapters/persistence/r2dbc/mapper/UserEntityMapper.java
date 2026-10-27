@@ -13,6 +13,11 @@ public final class UserEntityMapper {
                 domain.getDocumentTypeId(), domain.getRoleId(), domain.getCompanyId(), true);
     }
 
+    public static UserEntity toExistingEntity(final UserDomain domain) {
+        return new UserEntity(domain.getId(), domain.getName(), domain.getDocument(),
+                domain.getDocumentTypeId(), domain.getRoleId(), domain.getCompanyId(), false);
+    }
+
     public static UserDomain toDomain(final UserEntity entity) {
         return UserDomain.create(entity.getId(), entity.getName(), entity.getDocument(),
                 entity.getDocumentTypeId(), entity.getRoleId(), entity.getCompanyId());

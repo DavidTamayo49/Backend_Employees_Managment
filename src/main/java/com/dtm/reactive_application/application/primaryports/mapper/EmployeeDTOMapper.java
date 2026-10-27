@@ -4,10 +4,12 @@ import com.dtm.reactive_application.application.primaryports.dto.CatalogItemDTO;
 import com.dtm.reactive_application.application.primaryports.dto.CompanyDTO;
 import com.dtm.reactive_application.application.primaryports.dto.EmployeeDTO;
 import com.dtm.reactive_application.application.primaryports.dto.EmployeeDetailDTO;
+import com.dtm.reactive_application.application.primaryports.dto.ModifyEmployeeDTO;
 import com.dtm.reactive_application.application.primaryports.dto.RegisterNewEmployeeDTO;
 import com.dtm.reactive_application.crosscutting.helpers.UUIDHelper;
 import com.dtm.reactive_application.domain.user.UserDetailDomain;
 import com.dtm.reactive_application.domain.user.UserDomain;
+import com.dtm.reactive_application.domain.user.UserModificationDomain;
 
 public final class EmployeeDTOMapper {
 
@@ -16,6 +18,11 @@ public final class EmployeeDTOMapper {
 
     public static UserDomain toDomain(final RegisterNewEmployeeDTO dto) {
         return UserDomain.create(UUIDHelper.getDefault(), dto.name(), dto.document(),
+                dto.documentTypeId(), dto.roleId(), dto.companyId());
+    }
+
+    public static UserModificationDomain toModificationDomain(final ModifyEmployeeDTO dto) {
+        return UserModificationDomain.create(dto.id(), dto.name(), dto.document(),
                 dto.documentTypeId(), dto.roleId(), dto.companyId());
     }
 

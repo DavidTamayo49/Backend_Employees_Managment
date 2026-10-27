@@ -29,9 +29,26 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    public Mono<Boolean> existsByDocumentTypeIdAndDocumentAndIdNot(final UUID documentTypeId, final String document,
+                                                                  final UUID id) {
+        return r2dbcRepository.existsByDocumentTypeIdAndDocumentAndIdNot(documentTypeId, document, id);
+    }
+
+    @Override
     public Mono<UserDomain> save(final UserDomain user) {
         return r2dbcRepository.save(UserEntityMapper.toNewEntity(user))
                 .map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    public Mono<UserDomain> update(final UserDomain user) {
+        return r2dbcRepository.save(UserEntityMapper.toExistingEntity(user))
+                .map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    public Mono<UserDomain> findById(final UUID id) {
+        return r2dbcRepository.findById(id).map(UserEntityMapper::toDomain);
     }
 
     @Override

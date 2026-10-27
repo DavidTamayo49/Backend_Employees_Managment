@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface UserR2dbcRepository extends ReactiveCrudRepository<UserEntity, UUID> {
 
     Mono<Boolean> existsByDocumentTypeIdAndDocument(UUID documentTypeId, String document);
+
+    Mono<Boolean> existsByDocumentTypeIdAndDocumentAndIdNot(UUID documentTypeId, String document, UUID id);
 }
